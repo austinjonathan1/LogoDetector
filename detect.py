@@ -1,4 +1,21 @@
+# Current Class #: 15
+# VCCI_Japan
+# CE_Europe
+# WEEE_Europe
+# CSA_UL_US_Canada
+# RCM_ Australia
+# RoHs_China
+# KC_Korea
+# RoHs_Taiwan
+# CCC_China
+# EAC_Russia
+# Cp_Morocco
+# Anatel_Brazil
+# UKCA_UK
+# BIS_India
+# NOM_Mexico
 # LIBRARIES, DECLARATIONS, & FLAGS
+total_number_of_logos = 15
 import time
 from absl import app, flags, logging
 from absl.flags import FLAGS
@@ -12,7 +29,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill
 from pdf2image import convert_from_path, convert_from_bytes
 from pdf2image.exceptions import (PDFInfoNotInstalledError, PDFPageCountError, PDFSyntaxError)
-extola = {}
+extola = {} # excel to label conversion dictionary
 extola["ALL CE COUNTRIES"] = ["CE_Europe", "WEEE_Europe"]
 extola["AUSTRALIA"] = ["RCM_ Australia"]
 extola["BRAZIL"] = ["Anatel_Brazil"]
@@ -34,9 +51,9 @@ def main(_argv):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
     if len(physical_devices) > 0:
         tf.config.experimental.set_memory_growth(physical_devices[0], True)
-    yolo = YoloV3(classes=15) # number of classes/logos
+    yolo = YoloV3(classes=total_number_of_logos) # number of classes/logos, needs to be updated if another logo is added
     yolo.load_weights('./weights/yolov3-custom.tf').expect_partial() # file path to weights
-    class_names = [c.strip() for c in open('./data/labels/custom.names').readlines()] # file path to classes list
+    class_names = [c.strip() for c in open('./data/labels/custom.names').readlines()] # file path to classes list, needs to be updated if another logo is added
     if FLAGS.count:
         count = FLAGS.count
     excel = []
@@ -50,7 +67,7 @@ def main(_argv):
         img_raw = tf.image.decode_image(
             open(image, 'rb').read(), channels=3)
         raw_images.append(img_raw)
-    i = 0
+    i = 0 # index number for main loop
     logos = [] # list of detected logos for each image
     approvals = [] # list of excel data for each image
     for raw_img in raw_images:
