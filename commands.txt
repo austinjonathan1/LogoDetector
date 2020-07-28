@@ -1,0 +1,49 @@
+### TESTING ###
+
+# PDF/Excel
+* Bulk rename all excel and pdf files to 'test'" *
+cd LogoDetector
+conda activate yolov3-gpu
+python detect.py --count 4
+
+# Webcam
+cd LogoDetector
+conda activate yolov3-gpu
+python detect_video.py --video 0 
+
+### MAINTENANCE ###
+
+# VSCode Editing
+cd LogoDetector/data/labels
+code .
+
+### SETUP ###
+
+#1 Remote Desktop
+* On VPN, log on to a Cisco Remote Desktop *
+Computer: CC-VM-W10-5\labuser
+Password: CC3ngLabs!
+
+#2 Download
+* git @ https://gitforwindows.org/ *
+* anaconda @ https://www.anaconda.com/products/individual *
+* vscode @ https://code.visualstudio.com/Download (or Notepad++)*
+* python @ https://www.python.org/downloads/windows/ *
+
+#3 Clone
+git clone https://github.com/austinjonathan1/LogoDetector.git
+conda init bash
+
+#4 Installation (CPU * or * GPU)
+cd LogoDetector
+conda env create -f conda-cpu.yml * or * conda env create -f conda-gpu.yml
+conda activate yolov3-cpu * or * conda activate yolov3-gpu
+conda install -c conda-forge poppler
+pip install pdf2image
+pip install openpyxl
+
+#5 Weights
+* Download weights, rename to "yolov3_custom_last.weights", and move to "weights" folder in "Object-Detection-API" folder *
+cd LogoDetector
+conda activate yolov3-gpu
+python load_weights.py --weights './weights/yolov3_custom_last.weights' --output './weights/yolov3-custom.tf' --num_classes '15'
