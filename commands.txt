@@ -1,4 +1,17 @@
-### TESTING ###
+### CPU TESTING ###
+
+# PDF/Excel
+* Bulk rename all excel and pdf files to 'test'" *
+cd LogoDetector
+conda activate yolov3-cpu
+python detect.py --count 4
+
+# Webcam
+cd LogoDetector
+conda activate yolov3-cpu
+python detect_video.py --video 0 
+
+### GPU TESTING ###
 
 # PDF/Excel
 * Bulk rename all excel and pdf files to 'test'" *
@@ -27,8 +40,8 @@ Password: CC3ngLabs!
 #2 Download
 * git @ https://gitforwindows.org/ *
 * anaconda @ https://www.anaconda.com/products/individual *
-* vscode @ https://code.visualstudio.com/Download (or Notepad++)*
 * python @ https://www.python.org/downloads/windows/ *
+* Notepad++ OR vscode @ https://code.visualstudio.com/Download *
 
 #3 Clone
 git clone https://github.com/austinjonathan1/LogoDetector.git
