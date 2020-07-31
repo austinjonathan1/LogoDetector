@@ -56,7 +56,7 @@ pip install pdf2image
 pip install openpyxl
 
 #5 Weights
-* Download weights, rename to "yolov3_custom_last.weights", and move to "weights" folder in "Object-Detection-API" folder *
+* Download weights, rename to "yolov3_custom_last.XXXX", and move to "weights" folder in "Object-Detection-API" folder *
 cd LogoDetector
 conda activate yolov3-gpu
 python load_weights.py --weights './weights/yolov3_custom_last.weights' --output './weights/yolov3-custom.tf' --num_classes '15'
